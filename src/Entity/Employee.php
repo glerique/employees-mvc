@@ -1,0 +1,123 @@
+<?php
+
+namespace App\Entity;
+
+class Employee
+{
+
+    public $id;
+    public $lastName;
+    public $firstName;
+    public $birthDate;
+    public $hireDate;
+    public $salary;
+    public $departement;
+    /*
+    public function hydrate(array $donnees)
+    {
+        foreach ($donnees as $key => $value) {
+            // On récupère le nom du setter correspondant à l'attribut.
+            $method = 'set' . ucfirst($key);
+            // Si le setter correspondant existe.
+            if (method_exists($this, $method)) {
+                // On appelle le setter.
+                $this->$method($value);
+            }
+        }
+    }
+
+    // Important car sinon l'objet à sa création est vide.
+    public function __construct($valeurs = [])
+    {
+        if (!empty($valeurs)) // Si on a spécifié des valeurs, alors on hydrate l'objet.
+        {
+            $this->hydrate($valeurs);
+        }
+    }
+    */
+    /**
+     * Getters 
+     */
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getLastName()
+    {
+        return $this->last_name;
+    }
+
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
+
+    public function getBirthDate()
+    {
+        return $this->birth_date;
+    }
+
+    public function getHireDate()
+    {
+        return $this->hire_date;
+    }
+
+    public function getSalary()
+    {
+        return $this->salary;
+    }
+
+    public function getDepartement()
+    {
+        return $this->departement;
+    }
+
+
+    /**
+     * Setters
+     */
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setLastName($last_name)
+    {
+        $this->last_name = $last_name;
+        return $last_name;
+    }
+
+    public function setFirstName($first_name)
+    {
+        $this->first_name = $first_name;
+        return $first_name;
+    }
+
+    public function setBirthDate($birth_date)
+    {
+        $this->birth_date = $birth_date;
+        return $birth_date;
+    }
+
+    public function setHireDate($hire_date)
+    {
+        $this->hire_date = $hire_date;
+        return $hire_date;
+    }
+
+    public function setSalary($salary)
+    {
+        $this->salary = $salary;
+        return $salary;
+    }
+
+    public function setDepartement($departement)
+    {
+        $this->departement = $departement;
+        return $departement;
+    }
+}
