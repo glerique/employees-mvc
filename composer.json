@@ -1,0 +1,7 @@
+{
+    "name": "nesco/salaries",
+    "require": {},
+    "autoload": {
+        "psr-4": {"App\\": "src/"}
+    }
+}
