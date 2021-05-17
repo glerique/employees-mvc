@@ -9,8 +9,8 @@ use App\Model\EmployeeManager;
 class Controller
 {
 
-    public $model;
-    public $renderer;
+    private $model;
+    
 
     public function __construct()
     {
@@ -18,16 +18,17 @@ class Controller
         
     }
 
-    public function invoke()
+    public function index()
     {
-        if (!isset($_GET['id'])) {
+        
             $employees = $this->model->findAll();            
             Renderer::render("listing", compact('employees'));
-            //include 'src/View/listing.php';
-        } else {
-            $employee = $this->model->findById($_GET['id']);
-            Renderer::render("details", compact('employee'));
-            //include 'src/View/details.php';
-        }
+            
+    }
+
+    public function show(){
+        $employee = $this->model->findById($_GET['id']);
+        Renderer::render("details", compact('employee'));
+
     }
 }
