@@ -22,7 +22,7 @@
 
                         foreach ($employees as $employee) {
                             echo '<tr>
-                            <td><a href="index.php?id=' . $employee->getId() . '">' . $employee->getId() . '</a></td>
+                            <td><a href="index.php?action=show&id='.$employee->getId().'"> ' . $employee->getId() . '</a></td>                            
                             <td>' . $employee->getLastName() . '</td>
                             <td>' . $employee->getFirstName() . '</td>
                             <td>' . $employee->getBirthDate() . '</td>
