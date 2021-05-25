@@ -14,6 +14,8 @@
                             <th>Date d'embauche</th>
                             <th>Salaire</th>
                             <th>Service</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
                         </tr>
                     </thead>
 
@@ -29,6 +31,8 @@
                             <td>' . $employee->getHireDate() . '</td>
                             <td>' . $employee->getSalary() . '</td>
                             <td>' . $employee->getDepartement() . '</td>
+                            <td><a href="index.php?action=editView&id='.$employee->getId().'">Modifier</a></td>
+                            <td><a href="index.php?action=delete&id='.$employee->getId().'">Supprimer</a></td>
                             </tr>';
                         }
                         ?>

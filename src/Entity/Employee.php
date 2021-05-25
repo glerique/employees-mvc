@@ -5,13 +5,13 @@ namespace App\Entity;
 class Employee
 {
 
-    public $id;
-    public $lastName;
-    public $firstName;
-    public $birthDate;
-    public $hireDate;
-    public $salary;
-    public $departement;
+    private $id;
+    private $last_name;
+    private $first_name;
+    private $birth_date;
+    private $hire_date;
+    private $salary;
+    private $departement;
     /*
     public function hydrate(array $donnees)
     {
@@ -35,6 +35,7 @@ class Employee
         }
     }
     */
+    
     /**
      * Getters 
      */
@@ -82,7 +83,7 @@ class Employee
     public function setId($id)
     {
         $this->id = $id;
-        return $this;
+        return $id;
     }
 
     public function setLastName($last_name)

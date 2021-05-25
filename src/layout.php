@@ -23,7 +23,7 @@
                                 <a class="nav-link" href="index.php">Liste des salariés</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Création</a>
+                                <a class="nav-link" href="index.php?action=newView">Création</a>
                             </li>
                         </ul>
                     </div>
