@@ -1,17 +1,8 @@
 <?php
-require_once('autoload.php');
-echo '<hr>';
+require 'vendor/autoload.php';
 
-$db= new PDO('mysql:host=localhost;dbname=todo', 'root', 'test');
+use App\Lib\Application;
+/** Pour afficher les erreur en Dev */
+ini_set('display_errors', 1);
 
-echo '<h2>Add</h2>';
-include 'add.php';
-echo '<hr>';
-
-echo '<h2>Get</h2>';
-include "get.php";
-echo '<hr>';
-
-echo '<h2>getList</h2>';
-include 'getlist.php';
-?>
+Application::start();
