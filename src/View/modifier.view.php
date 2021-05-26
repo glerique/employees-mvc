@@ -7,7 +7,7 @@
   <div class="container">
     <div class="row">      
       <div class="col-lg-8">
-        <form class="form-contact contact_form" method="post" action="index.php?action=edit">
+        <form class="form-contact contact_form" method="post" action="/mvc-employees/controller/edit">
           <div class="row">
           <div class="col-12">
               <div class="form-group">
