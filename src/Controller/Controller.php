@@ -25,9 +25,10 @@ class Controller
         Renderer::render("listing", compact('employees'));
     }
 
-    public function show()
+    public function show(int $id)
     {
-        $employee = $this->model->findById($_GET['id']);
+        
+        $employee = $this->model->findById($id);
         Renderer::render("details", compact('employee'));
     }
 
@@ -56,9 +57,8 @@ class Controller
         $manager->add($employee);
     }
 
-    public function editView()
+    public function editView(int $id)
     {
-        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         $manager = $this->model;
         $employee = $manager->findById($id);
         Renderer::Render("modifier", compact('employee'));
@@ -86,9 +86,8 @@ class Controller
         $manager->update($employee);
     }
 
-    public function delete()
+    public function delete(int $id)
     {
-        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         $manager = $this->model;
         $employee = $manager->findById($id);
         $manager->deleteById($employee);

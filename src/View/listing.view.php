@@ -24,15 +24,15 @@
 
                         foreach ($employees as $employee) {
                             echo '<tr>
-                            <td><a href="index.php?action=show&id='.$employee->getId().'"> ' . $employee->getId() . '</a></td>                            
+                            <td><a href="/mvc-employees/controller/show/'.$employee->getId().'"> ' . $employee->getId() . '</a></td>                            
                             <td>' . $employee->getLastName() . '</td>
                             <td>' . $employee->getFirstName() . '</td>
                             <td>' . $employee->getBirthDate() . '</td>
                             <td>' . $employee->getHireDate() . '</td>
                             <td>' . $employee->getSalary() . '</td>
                             <td>' . $employee->getDepartement() . '</td>
-                            <td><a href="index.php?action=editView&id='.$employee->getId().'">Modifier</a></td>
-                            <td><a href="index.php?action=delete&id='.$employee->getId().'">Supprimer</a></td>
+                            <td><a href="/mvc-employees/controller/editView/'.$employee->getId().'">Modifier</a></td>
+                            <td><a href="/mvc-employees/controller/delete/'.$employee->getId().'">Supprimer</a></td>
                             </tr>';
                         }
                         ?>
