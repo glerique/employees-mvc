@@ -2,8 +2,6 @@
 
 namespace App\Lib;
 
-use App\Controller\Controller;
-
 
 class Application
 {
@@ -18,7 +16,7 @@ class Application
             if (!empty($params[0])) {
                 $controllerName = ucfirst($params[0]);
             } else {
-                $controllerName = "Controller";
+                $controllerName = "Employee";
             }
 
             if (!empty($params[1])) {
@@ -27,7 +25,7 @@ class Application
                 $action = "index";
             }
 
-            $controllerName = "App\Controller\\" . $controllerName;
+            $controllerName = "App\Controller\\" . $controllerName."Controller";
 
             $controller = new $controllerName();
 
