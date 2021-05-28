@@ -19,11 +19,17 @@
                     </button>
                     <div id="navbarContent" class="collapse navbar-collapse">
                         <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/mvc-employees/controller/index">Liste des salariés</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/mvc-employees/employee/index">Liste des salariés</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/mvc-employees/controller/newView">Création</a>
+                                <a class="nav-link" href="/mvc-employees/employee/newView">Nouveau salarié</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/mvc-employees/departement/index">Liste des services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/mvc-employees/departement/newView">Nouveau service</a>
                             </li>
                         </ul>
                     </div>
