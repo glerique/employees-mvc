@@ -7,7 +7,7 @@
   <div class="container">
     <div class="row">      
       <div class="col-lg-8">
-        <form class="form-contact contact_form" method="post" action="/mvc-employees/controller/new">
+        <form class="form-contact contact_form" method="post" action="/mvc-employees/employee/new">
           <div class="row">
             <div class="col-12">
               <div class="form-group">
@@ -35,8 +35,14 @@
               </div>
             </div>
             <div class="col-12">
-              <div class="form-group">
-                Service : <input class="form-control" type="text" name="departement">
+            <div class="form-group">
+                <label for="service">Services : </label>
+                <select class="form-control" name ="departementId">
+                  <?php foreach($departements as $departement){
+                  echo '<option value ='.$departement->getId().'>'.$departement->getName().'</option>';
+                }
+                  ?>
+                </select>
               </div>
             </div>   
           </div>          

@@ -23,16 +23,20 @@
                         <?php
 
                         foreach ($employees as $employee) {
+                            /*
+                            var_dump($employee->getDepartement());
+                            die();
+                            */
                             echo '<tr>
-                            <td><a href="/mvc-employees/controller/show/'.$employee->getId().'"> ' . $employee->getId() . '</a></td>                            
+                            <td><a href="/mvc-employees/employee/show/'.$employee->getId().'"> ' . $employee->getId() . '</a></td>                            
                             <td>' . $employee->getLastName() . '</td>
                             <td>' . $employee->getFirstName() . '</td>
                             <td>' . $employee->getBirthDate() . '</td>
                             <td>' . $employee->getHireDate() . '</td>
                             <td>' . $employee->getSalary() . '</td>
                             <td>' . $employee->getDepartement() . '</td>
-                            <td><a href="/mvc-employees/controller/editView/'.$employee->getId().'">Modifier</a></td>
-                            <td><a href="/mvc-employees/controller/delete/'.$employee->getId().'">Supprimer</a></td>
+                            <td><a href="/mvc-employees/employee/editView/'.$employee->getId().'">Modifier</a></td>
+                            <td><a href="/mvc-employees/employee/delete/'.$employee->getId().'">Supprimer</a></td>
                             </tr>';
                         }
                         ?>

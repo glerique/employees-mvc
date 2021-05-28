@@ -5,9 +5,10 @@ namespace App\Controller;
 use App\Lib\Renderer;
 use App\Entity\Employee;
 use App\Model\EmployeeManager;
+use App\Model\DepartementManager;
 
 
-class Controller
+class EmployeeController
 {
 
     private $model;
@@ -22,19 +23,27 @@ class Controller
     {
 
         $employees = $this->model->findAll();
-        Renderer::render("listing", compact('employees'));
+        foreach ($employees as $employee)
+        {
+            $departementManager = new DepartementManager();
+            $employee->setDepartement($departementManager->findById($employee->getDepartementId()));            
+        }
+        Renderer::render("employee/listing", compact('employees'));
     }
 
     public function show(int $id)
     {
-        
         $employee = $this->model->findById($id);
-        Renderer::render("details", compact('employee'));
+        $departementManager = new DepartementManager();
+        $employee->setDepartement($departementManager->findById($employee->getDepartementId())); 
+        Renderer::render("employee/details", compact('employee'));
     }
 
     public function newView()
-    {
-        Renderer::render("nouveau");
+    {        
+        $departementManager = new DepartementManager();
+        $departements = $departementManager->findAll();
+        Renderer::render("employee/nouveau", compact('departements'));
     }
 
     public function new()
@@ -44,7 +53,7 @@ class Controller
         $birth_date = filter_input(INPUT_POST, 'birth_date', FILTER_SANITIZE_SPECIAL_CHARS);;
         $hire_date = filter_input(INPUT_POST, 'hire_date', FILTER_SANITIZE_SPECIAL_CHARS);
         $salary = filter_input(INPUT_POST, 'salary', FILTER_SANITIZE_SPECIAL_CHARS);
-        $departement = filter_input(INPUT_POST, 'departement', FILTER_SANITIZE_SPECIAL_CHARS);
+        $departementId = filter_input(INPUT_POST, 'departementId', FILTER_SANITIZE_SPECIAL_CHARS);
 
         $manager = $this->model;
         $employee = new Employee;
@@ -53,15 +62,17 @@ class Controller
         $employee->setBirthDate($birth_date);
         $employee->setHireDate($hire_date);
         $employee->setSalary($salary);
-        $employee->setDepartement($departement);
+        $employee->setDepartementId($departementId);
         $manager->add($employee);
     }
 
     public function editView(int $id)
     {
         $manager = $this->model;
+        $departementManager = new DepartementManager();
         $employee = $manager->findById($id);
-        Renderer::Render("modifier", compact('employee'));
+        $departements = $departementManager->findAll();         
+        Renderer::Render("employee/modifier", compact('employee','departements'));
     }
 
     public function edit()
@@ -72,7 +83,7 @@ class Controller
         $birth_date = filter_input(INPUT_POST, 'birth_date', FILTER_SANITIZE_SPECIAL_CHARS);;
         $hire_date = filter_input(INPUT_POST, 'hire_date', FILTER_SANITIZE_SPECIAL_CHARS);
         $salary = filter_input(INPUT_POST, 'salary', FILTER_SANITIZE_SPECIAL_CHARS);
-        $departement = filter_input(INPUT_POST, 'departement', FILTER_SANITIZE_SPECIAL_CHARS);
+        $departementId = filter_input(INPUT_POST, 'departementId', FILTER_SANITIZE_SPECIAL_CHARS);
 
         $manager = $this->model;
         $employee = new Employee;
@@ -82,7 +93,7 @@ class Controller
         $employee->setBirthDate($birth_date);
         $employee->setHireDate($hire_date);
         $employee->setSalary($salary);
-        $employee->setDepartement($departement);
+        $employee->setDepartementId($departementId);
         $manager->update($employee);
     }
 

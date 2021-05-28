@@ -1,13 +1,13 @@
 <section class="hero-banner d-flex align-items-center">
   <div class="container text-center">
-    <h2>modifier un employé</h2>
+    <h2>modifier un employé</h2>   
   </div>
 </section>
 <section class="contact-section area-padding">
   <div class="container">
     <div class="row">      
       <div class="col-lg-8">
-        <form class="form-contact contact_form" method="post" action="/mvc-employees/controller/edit">
+        <form class="form-contact contact_form" method="post" action="/mvc-employees/employee/edit">
           <div class="row">
           <div class="col-12">
               <div class="form-group">
@@ -39,11 +39,20 @@
                 Salaire : <input class="form-control" type="text" name="salary" value="<?= $employee->getSalary(); ?>">
               </div>
             </div>
-            <div class="col-12">
-              <div class="form-group">
-                Service : <input class="form-control" type="text" name="departement" value="<?= $employee->getDepartement(); ?>">
+             <div class="col-12">
+            <div class="form-group">
+                <label for="service">Services : </label>
+                <select class="form-control" name ="departementId">
+                <?php 
+                foreach ($departements as $departement){ ?>
+                  <option value ="<?= $departement->getId();?>"<?php if($departement->getId() === $employee->getDepartementId()){echo 'selected' ;}?>><?= $departement->getName(); ?> </option>
+                  <?php
+                  }
+                  ?>
+                  ?>
+                </select>
               </div>
-            </div>   
+            </div>  
           </div>          
           <div class="form-group mt-3">
             <input type="submit" class="button button-contactForm" name="modifier" value="modifier">
