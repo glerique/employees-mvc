@@ -4,13 +4,13 @@ namespace App\Controller;
 
 use App\Lib\Renderer;
 use App\Entity\Employee;
+use App\Controller\Controller;
 use App\Model\EmployeeManager;
 use App\Model\DepartementManager;
 
 
-class EmployeeController
+class EmployeeController extends Controller
 {
-
     private $model;
 
 
@@ -31,9 +31,22 @@ class EmployeeController
         Renderer::render("employee/listing", compact('employees'));
     }
 
-    public function show(int $id)
+    public function show()
     {
+        $id =$_GET['id'];
+        if (!$id OR !is_int($id)){
+            $this->redirectWithError(
+                "/mvc-employees/employee/index",
+                "Merci de renseigner un id"
+            );
+        }
         $employee = $this->model->findById($id);
+        if(!$employee){
+            $this->redirectWithError(
+                "/mvc-employees/employee/index",
+                "Vous essayé de consulter un employee qui n'existe pas !"
+            );
+        }
         $departementManager = new DepartementManager();
         $employee->setDepartement($departementManager->findById($employee->getDepartementId())); 
         Renderer::render("employee/details", compact('employee'));
@@ -55,6 +68,14 @@ class EmployeeController
         $salary = filter_input(INPUT_POST, 'salary', FILTER_SANITIZE_SPECIAL_CHARS);
         $departementId = filter_input(INPUT_POST, 'departementId', FILTER_SANITIZE_SPECIAL_CHARS);
 
+
+        if(!$last_name || !$first_name || !$birth_date || !$hire_date || !$salary || !$departementId){
+            $this->redirectWithError(
+                "/mvc-employees/employee/new",
+                "Merci de bien remplir le formulaire"
+            );
+        }
+
         $manager = $this->model;
         $employee = new Employee;
         $employee->setLastname($last_name);
@@ -64,13 +85,31 @@ class EmployeeController
         $employee->setSalary($salary);
         $employee->setDepartementId($departementId);
         $manager->add($employee);
+
+        $this->redirectWithSuccess(
+            "/mvc-employees/employee/index",
+            "Employé ajouté avec succès"
+        );
     }
 
-    public function editView(int $id)
+    public function editView()
     {
+        $id =$_GET['id'];
+        if (!$id OR !is_int($id)){
+            $this->redirectWithError(
+                "/mvc-employees/employee/index",
+                "Merci de renseigner un id"
+            );
+        }
         $manager = $this->model;
         $departementManager = new DepartementManager();
         $employee = $manager->findById($id);
+        if(!$employee){
+            $this->redirectWithError(
+                "/mvc-employees/employee/index",
+                "Vous essayé de modifier un employé qui n'existe pas !"
+            );
+        }
         $departements = $departementManager->findAll();         
         Renderer::Render("employee/modifier", compact('employee','departements'));
     }
@@ -85,6 +124,13 @@ class EmployeeController
         $salary = filter_input(INPUT_POST, 'salary', FILTER_SANITIZE_SPECIAL_CHARS);
         $departementId = filter_input(INPUT_POST, 'departementId', FILTER_SANITIZE_SPECIAL_CHARS);
 
+        if(!$id || !$last_name || !$first_name || !$birth_date || !$hire_date || !$salary || !$departementId){
+            $this->redirectWithError(
+                "/mvc-employees/employee/new",
+                "Merci de bien remplir le formulaire !"
+            );
+        }
+
         $manager = $this->model;
         $employee = new Employee;
         $employee->setId($id);
@@ -95,12 +141,35 @@ class EmployeeController
         $employee->setSalary($salary);
         $employee->setDepartementId($departementId);
         $manager->update($employee);
+
+        $this->redirectWithSuccess(
+            "/mvc-employees/employee/index",
+            "Employé modifié avec succès"
+        );
     }
 
-    public function delete(int $id)
+    public function delete()
     {
+        $id =$_GET['id'];
+        if (!$id OR !is_int($id)){
+            $this->redirectWithError(
+                "/mvc-employees/employee/index",
+                "Merci de renseigner un id"
+            );
+        }
         $manager = $this->model;
         $employee = $manager->findById($id);
+        if(!$employee){
+            $this->redirectWithError(
+                "/mvc-employees/employee/index",
+                "Vous essayé de supprimer un employé qui n'existe pas !"
+            );
+        }
         $manager->deleteById($employee);
+
+        $this->redirectWithSuccess(
+            "/mvc-employees/employee/index",
+            "Employé supprimé avec succès"
+        );
     }
 }
