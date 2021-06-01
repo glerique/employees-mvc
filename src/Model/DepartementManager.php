@@ -3,6 +3,8 @@
 namespace App\Model;
 
 use PDO;
+use Exception;
+use PDOStatement;
 use \App\Model\Bdd;
 use App\Entity\Departement;
 
@@ -30,19 +32,21 @@ class DepartementManager
 
         public function findById($id)
         {
-
+                
                 $req = $this->db->prepare('SELECT * FROM departement WHERE id = :id');
                 $req->bindValue(':id', (int)$id);
                 $req->execute();
                 $req->setFetchMode(PDO::FETCH_CLASS, 'App\Entity\Departement');
                 $departement =  $req->fetch();
                 return $departement;
+
+                
         }
 
         public function add(Departement $departement)
         {
                 $req = $this->db->prepare('INSERT INTO departement (name) 
-                VALUES (:departement)');                
+                VALUES (:name)');                
                 $req->bindvalue(':name', $departement->getName());
                 $req->execute();
         }
