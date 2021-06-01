@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    
 </head>
 
 <body>
@@ -47,6 +47,22 @@
             </div>
         </div> 
     </div>
+    <div class="container">
+    <?php if (App\Lib\Session::showFlashes('error')): ?>
+                <div class="alert alert-danger" role="alert">
+				<?php foreach (App\Lib\Session::getFlashes('error') as $message): ?>
+					<p><?= $message ?></p>
+				<?php endforeach ?>
+			</div>
+		<?php endif?>
+        <?php if (App\Lib\Session::showFlashes('success')): ?>
+			<div class="alert alert-success">
+				<?php foreach (App\Lib\Session::getFlashes('success') as $message): ?>
+					<p><?= $message ?></p>
+				<?php endforeach ?>
+			</div>
+		<?php endif?>
+    </div>    	
     <?= $pageContent; ?>
     <div class="bg-light">
         <div class="container">

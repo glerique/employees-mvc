@@ -6,7 +6,7 @@
 <section class="contact-section area-padding">
   <div class="container">
     <div class="row">      
-      <div class="col-lg-8">
+      <div class="col-lg-12">
         <form class="form-contact contact_form" method="post" action="/mvc-employees/employee/edit">
           <div class="row">
           <div class="col-12">
@@ -55,8 +55,8 @@
             </div>  
           </div>          
           <div class="form-group mt-3">
-            <input type="submit" class="button button-contactForm" name="modifier" value="modifier">
-            <input type="button" class="button button-contactForm" value="Retour" onClick="document.location.href = document.referrer" />
+            <input type="submit" class="btn btn-primary" name="modifier" value="modifier">
+            <input type="button" class="btn btn-primary" value="Retour" onClick="document.location.href = document.referrer" />
           </div>
         </form>
       </div>
