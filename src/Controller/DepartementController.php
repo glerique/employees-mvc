@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Lib\Renderer;
 use App\Entity\Departement;
+use App\Controller\Controller;
 use App\Model\DepartementManager;
 
 
 
-class DepartementController
+class DepartementController extends Controller
 {
 
     private $model;
@@ -26,12 +27,30 @@ class DepartementController
         
         Renderer::render("departement/listing", compact('departements'));
     }
-
-    public function show(int $id)
+    
+    
+    
+    public function show()
     {
+        $id =$_GET['id'];
+        if (!$id OR !is_int($id)){
+            $this->redirectWithError(
+                "/mvc-employees/departement/index",
+                "Merci de renseigner un id"
+            );
+        }  
         $departement = $this->model->findById($id);
+        if(!$departement){
+            $this->redirectWithError(
+                "/mvc-employees/departement/index",
+                "Vous essayé de consulter un service qui n'existe pas !"
+            );
+        }
         Renderer::render("departement/details", compact('departement'));
+       
     }
+    
+
 
     public function newView()
     {        
@@ -47,14 +66,30 @@ class DepartementController
         $departement = new Departement;
         $departement->setDepartement($name);
         $manager->add($departement);
+
+        $this->redirectWithSuccess(
+            "/mvc-employees/departement/index",
+            "Service ajouté avec succès"
+        );
     }
 
-    public function editView(int $id)
+    public function editView()
     {
-        $manager = $this->model;
-        
+        $id =$_GET['id'];
+        if (!$id OR !is_int($id)){
+            $this->redirectWithError(
+                "/mvc-employees/departement/index",
+                "Merci de renseigner un id"
+            );
+        }       
+        $manager = $this->model;        
         $departement = $manager->findById($id);
-              
+        if(!$departement){
+            $this->redirectWithError(
+                "/mvc-employees/departement/index",
+                "Vous essayé de supprimer un service qui n'existe pas !"
+            );
+        }      
         Renderer::Render("departement/modifier", compact('departement'));
     }
 
@@ -62,20 +97,49 @@ class DepartementController
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
         $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
-        
+        if(!$id || !$name){
+            $this->redirectWithError(
+                "/mvc-employees/departement/editView",
+                "Merci de bien remplir le formulaire !"
+
+            );
+        }
 
         $manager = $this->model;
         $departement = new Departement;
         $departement->setId($id);
         $departement->setDepartement($name);
-        $manager->update($departement);    
+        $manager->update($departement);
+        
+        $this->redirectWithSuccess(
+            "/mvc-employees/departement/index",
+            "Service modifié avec succès"
+        );
     }
 
-    public function delete(int $id)
+    public function delete()
     {
+        $id =$_GET['id'];
+        if (!$id OR !is_int($id)){
+            $this->redirectWithError(
+                "/mvc-employees/departement/index",
+                "Merci de renseigner un id"
+            );
+        }        
         $manager = $this->model;
         $departement = $manager->findById($id);
+        if(!$departement){
+            $this->redirectWithError(
+                "/mvc-employees/departement/index",
+                "Vous essayé de supprimer un service qui n'existe pas !"
+            );
+        }
         $manager->deleteById($departement);
+
+        $this->redirectWithSuccess(
+            "/mvc-employees/departement/index",
+            "Service supprimé avec succès"
+        );
     }
     
 }
