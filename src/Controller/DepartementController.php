@@ -24,47 +24,46 @@ class DepartementController extends Controller
     {
 
         $departements = $this->model->findAll();
-        
+
         Renderer::render("departement/listing", compact('departements'));
     }
-    
-    
-    
+
+
+
     public function show()
     {
-        $id =$_GET['id'];
-        if (!$id OR !is_int($id)){
+        $id = $_GET['id'];
+        if (!$id or !is_int($id)) {
             $this->redirectWithError(
                 "/mvc-employees/departement/index",
                 "Merci de renseigner un id"
             );
-        }  
+        }
         $departement = $this->model->findById($id);
-        if(!$departement){
+        if (!$departement) {
             $this->redirectWithError(
                 "/mvc-employees/departement/index",
                 "Vous essayé de consulter un service qui n'existe pas !"
             );
         }
         Renderer::render("departement/details", compact('departement'));
-       
     }
-    
+
 
 
     public function newView()
-    {        
+    {
         Renderer::render("departement/nouveau");
     }
 
     public function new()
     {
         $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
-       
+
 
         $manager = $this->model;
         $departement = new Departement;
-        $departement->setDepartement($name);
+        $departement->setName($name);
         $manager->add($departement);
 
         $this->redirectWithSuccess(
@@ -75,21 +74,21 @@ class DepartementController extends Controller
 
     public function editView()
     {
-        $id =$_GET['id'];
-        if (!$id OR !is_int($id)){
+        $id = $_GET['id'];
+        if (!$id or !is_int($id)) {
             $this->redirectWithError(
                 "/mvc-employees/departement/index",
                 "Merci de renseigner un id"
             );
-        }       
-        $manager = $this->model;        
+        }
+        $manager = $this->model;
         $departement = $manager->findById($id);
-        if(!$departement){
+        if (!$departement) {
             $this->redirectWithError(
                 "/mvc-employees/departement/index",
                 "Vous essayé de supprimer un service qui n'existe pas !"
             );
-        }      
+        }
         Renderer::Render("departement/modifier", compact('departement'));
     }
 
@@ -97,7 +96,7 @@ class DepartementController extends Controller
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
         $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
-        if(!$id || !$name){
+        if (!$id || !$name) {
             $this->redirectWithError(
                 "/mvc-employees/departement/editView",
                 "Merci de bien remplir le formulaire !"
@@ -108,9 +107,9 @@ class DepartementController extends Controller
         $manager = $this->model;
         $departement = new Departement;
         $departement->setId($id);
-        $departement->setDepartement($name);
+        $departement->setName($name);
         $manager->update($departement);
-        
+
         $this->redirectWithSuccess(
             "/mvc-employees/departement/index",
             "Service modifié avec succès"
@@ -119,16 +118,16 @@ class DepartementController extends Controller
 
     public function delete()
     {
-        $id =$_GET['id'];
-        if (!$id OR !is_int($id)){
+        $id = $_GET['id'];
+        if (!$id or !is_int($id)) {
             $this->redirectWithError(
                 "/mvc-employees/departement/index",
                 "Merci de renseigner un id"
             );
-        }        
+        }
         $manager = $this->model;
         $departement = $manager->findById($id);
-        if(!$departement){
+        if (!$departement) {
             $this->redirectWithError(
                 "/mvc-employees/departement/index",
                 "Vous essayé de supprimer un service qui n'existe pas !"
@@ -141,5 +140,4 @@ class DepartementController extends Controller
             "Service supprimé avec succès"
         );
     }
-    
 }

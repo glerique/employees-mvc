@@ -34,15 +34,14 @@ class Departement
         return $id;
     }
 
-    public function setDepartement($name)
+    public function setName($name)
     {
         $this->name = $name;
         return $name;
     }
-    
+
     public function __toString()
     {
         return $this->name;
     }
-    
 }
