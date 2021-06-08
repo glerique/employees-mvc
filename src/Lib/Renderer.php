@@ -4,9 +4,9 @@ namespace App\Lib;
 
 class Renderer
 {
-  
+
     public static function render(string $path, array $var = []): void
-    {        
+    {
         extract($var);
 
         ob_start();
