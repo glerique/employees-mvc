@@ -1,6 +1,8 @@
 
-    
-        
+    <div class="container"> 
+    <p><b>Nombre total de salariés :</b> <?= $total ?></p>
+
+     </div>
     <div class="container">
         <div class="row">
             <div class="col">
@@ -16,6 +18,7 @@
                             <th>Service</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
+                            
                         </tr>
                     </thead>
 
@@ -31,8 +34,8 @@
                             <td><a href="/mvc-employees/employee/show/'.$employee->getId().'"> ' . $employee->getId() . '</a></td>                            
                             <td>' . $employee->getLastName() . '</td>
                             <td>' . $employee->getFirstName() . '</td>
-                            <td>' . $employee->getBirthDate() . '</td>
-                            <td>' . $employee->getHireDate() . '</td>
+                            <td>' . $employee->getBirthDate()->format('d-m-Y') . '</td>
+                            <td>' . $employee->getHireDate()->format('d-m-Y') . '</td>
                             <td>' . $employee->getSalary() . '</td>
                             <td>' . $employee->getDepartement() . '</td>
                             <td><a href="/mvc-employees/employee/editView/'.$employee->getId().'">Modifier</a></td>
