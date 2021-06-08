@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 
 <body>
@@ -23,6 +23,9 @@
                                 <a class="nav-link" href="/mvc-employees/employee/index">Liste des salariés</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="/mvc-employees/employee/index2/1">Paginate</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="/mvc-employees/employee/newView">Nouveau salarié</a>
                             </li>
                             <li class="nav-item">
@@ -31,6 +34,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/mvc-employees/departement/newView">Nouveau service</a>
                             </li>
+
                         </ul>
                     </div>
                 </nav>
@@ -39,30 +43,30 @@
     </div>
     <div class="container">
         <div class="row">
-                <div class="col">
-                    <div class="jumbotron">
-                        <h1>Bienvenue sur mvc-employee !</h1>
-                    </div>
+            <div class="col">
+                <div class="jumbotron">
+                    <h1>Bienvenue sur mvc-employee !</h1>
                 </div>
             </div>
-        </div> 
+        </div>
+    </div>
     </div>
     <div class="container">
-    <?php if (App\Lib\Session::showFlashes('error')): ?>
-                <div class="alert alert-danger" role="alert">
-				<?php foreach (App\Lib\Session::getFlashes('error') as $message): ?>
-					<p><?= $message ?></p>
-				<?php endforeach ?>
-			</div>
-		<?php endif?>
-        <?php if (App\Lib\Session::showFlashes('success')): ?>
-			<div class="alert alert-success">
-				<?php foreach (App\Lib\Session::getFlashes('success') as $message): ?>
-					<p><?= $message ?></p>
-				<?php endforeach ?>
-			</div>
-		<?php endif?>
-    </div>    	
+        <?php if (App\Lib\Session::showFlashes('error')) : ?>
+            <div class="alert alert-danger" role="alert">
+                <?php foreach (App\Lib\Session::getFlashes('error') as $message) : ?>
+                    <p><?= $message ?></p>
+                <?php endforeach ?>
+            </div>
+        <?php endif ?>
+        <?php if (App\Lib\Session::showFlashes('success')) : ?>
+            <div class="alert alert-success">
+                <?php foreach (App\Lib\Session::getFlashes('success') as $message) : ?>
+                    <p><?= $message ?></p>
+                <?php endforeach ?>
+            </div>
+        <?php endif ?>
+    </div>
     <?= $pageContent; ?>
     <div class="bg-light">
         <div class="container">
