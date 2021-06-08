@@ -3,8 +3,10 @@
 namespace App\Model;
 
 use PDO;
+use DateTime;
 use \App\Model\Bdd;
 use App\Entity\Employee;
+use App\Model\DepartementManager;
 
 
 
@@ -18,25 +20,62 @@ class EmployeeManager
                 $this->db = Bdd::dbConnect();
         }
 
-        
+
+        public function count()
+        {
+                $query = $this->db->prepare('SELECT COUNT(*) FROM employee');
+                $query->execute();
+                $count = $query->fetchColumn();
+                return $count;
+        }
+
+
+
         public function findAll()
         {
-                $req = $this->db->prepare('SELECT id, last_name, first_name, DATE_FORMAT(birth_date, "%d/%m/%Y") AS birth_date,
-                                                         DATE_FORMAT(hire_date, "%d/%m/%Y") AS hire_date, salary, departementId FROM employee');
+                $req = $this->db->prepare('SELECT * FROM employee');
                 $req->execute();
                 $req->setFetchMode(PDO::FETCH_CLASS, 'App\Entity\Employee');
                 $employees =  $req->fetchAll();
+                foreach ($employees as $employee) {
+                        $departementManager = new DepartementManager();
+                        $employee->setBirthDate(new DateTime($employee->getBirthDate()));
+                        $employee->setHireDate(new DateTime($employee->getHireDate()));
+                        $employee->setDepartement($departementManager->findById($employee->getDepartementId()));
+                }
+                return $employees;
+        }
+
+        public function PaginateFindAll($currentPage, $perPage)
+        {
+                $first = ($currentPage * $perPage) - $perPage;
+
+
+                $req = $this->db->prepare('SELECT * FROM `employee` ORDER BY `id` DESC LIMIT :premier, :perpage');
+                $req->bindValue(':premier', $first, PDO::PARAM_INT);
+                $req->bindValue(':perpage', $perPage, PDO::PARAM_INT);
+                $req->execute();
+                $req->setFetchMode(PDO::FETCH_CLASS, 'App\Entity\Employee');
+                $employees =  $req->fetchAll();
+                foreach ($employees as $employee) {
+                        $departementManager = new DepartementManager();
+                        $employee->setBirthDate(new DateTime($employee->getBirthDate()));
+                        $employee->setHireDate(new DateTime($employee->getHireDate()));
+                        $employee->setDepartement($departementManager->findById($employee->getDepartementId()));
+                }
                 return $employees;
         }
 
         public function findById($id)
         {
 
-                $req = $this->db->prepare('SELECT id, last_name, first_name, birth_date, hire_date, salary, departementId FROM employee WHERE id = :id');
+                $req = $this->db->prepare('SELECT * FROM employee WHERE id = :id');
                 $req->bindValue(':id', (int)$id);
                 $req->execute();
                 $req->setFetchMode(PDO::FETCH_CLASS, 'App\Entity\Employee');
                 $employee =  $req->fetch();
+                $departementManager = new DepartementManager();
+                $employee->setDepartement($departementManager->findById($employee->getDepartementId()));
                 return $employee;
         }
 
@@ -46,8 +85,8 @@ class EmployeeManager
                 VALUES (:last_name, :first_name, :birth_date, :hire_date, :salary, :departementId)');
                 $req->bindvalue(':last_name', $employee->getLastName());
                 $req->bindvalue(':first_name', $employee->getFirstName());
-                $req->bindvalue(':birth_date', $employee->getBirthDate());
-                $req->bindvalue(':hire_date', $employee->getHiredate());
+                $req->bindvalue(':birth_date', $employee->getBirthDate()->format('y-m-d'));
+                $req->bindvalue(':hire_date', $employee->getHiredate()->format('y-m-d'));
                 $req->bindvalue(':salary', $employee->getSalary());
                 $req->bindvalue(':departementId', $employee->getDepartementId());
                 $req->execute();
@@ -59,8 +98,8 @@ class EmployeeManager
                                                  hire_date = :hire_date, salary = :salary, departementId = :departementId WHERE id = :id');
                 $req->bindvalue(':last_name', $employee->getLastName());
                 $req->bindvalue(':first_name', $employee->getFirstName());
-                $req->bindvalue(':birth_date', $employee->getBirthDate());
-                $req->bindvalue(':hire_date', $employee->getHiredate());
+                $req->bindvalue(':birth_date', $employee->getBirthDate()->format('y-m-d'));
+                $req->bindvalue(':hire_date', $employee->getHiredate()->format('y-m-d'));
                 $req->bindvalue(':salary', $employee->getSalary());
                 $req->bindvalue(':departementId', $employee->getDepartementId());
                 $req->bindvalue(':id', $employee->getId());
@@ -72,6 +111,5 @@ class EmployeeManager
                 $req = $this->db->prepare('DELETE FROM employee WHERE id = :id');
                 $req->bindvalue(':id', $employee->getId());
                 $req->execute();
-                
         }
 }

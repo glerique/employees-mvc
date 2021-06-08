@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use DateTime;
+
 class Employee
 {
 
@@ -13,7 +15,7 @@ class Employee
     private $salary;
     private $departementId;
     
-    /*
+   /* 
     public function hydrate(array $donnees)
     {
         foreach ($donnees as $key => $value) {
@@ -37,6 +39,7 @@ class Employee
     }
     */
 
+    
     /**
      * Getters 
      */
@@ -56,12 +59,12 @@ class Employee
         return $this->first_name;
     }
 
-    public function getBirthDate()
+    public function getBirthDate() 
     {
         return $this->birth_date;
     }
 
-    public function getHireDate()
+    public function getHireDate() 
     {
         return $this->hire_date;
     }
@@ -105,13 +108,13 @@ class Employee
         return $first_name;
     }
 
-    public function setBirthDate($birth_date)
+    public function setBirthDate(DateTime $birth_date)
     {
         $this->birth_date = $birth_date;
         return $birth_date;
     }
 
-    public function setHireDate($hire_date)
+    public function setHireDate(DateTime $hire_date)
     {
         $this->hire_date = $hire_date;
         return $hire_date;
