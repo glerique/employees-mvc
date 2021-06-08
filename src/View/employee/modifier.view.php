@@ -45,10 +45,8 @@
                 <select class="form-control" name ="departementId">
                 <?php 
                 foreach ($departements as $departement){ ?>
-                  <option value ="<?= $departement->getId();?>"<?php if($departement->getId() === $employee->getDepartementId()){echo 'selected' ;}?>><?= $departement->getName(); ?> </option>
-                  <?php
-                  }
-                  ?>
+                  <option value ="<?= $departement->getId();?>"<?= ($departement->getId() === $employee->getDepartementId()) ? "selected" : "" ?>><?= $departement->getName(); ?> </option>
+                  <?php } ?>
                   ?>
                 </select>
               </div>
