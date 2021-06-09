@@ -23,10 +23,7 @@
                     <?php
 
                     foreach ($employees as $employee) {
-                        /*
-                            var_dump($employee->getDepartement());
-                            die();
-                            */
+
                         echo '<tr>
                             <td><a href="/mvc-employees/employee/show/' . $employee->getId() . '"> ' . $employee->getId() . '</a></td>                            
                             <td>' . $employee->getLastName() . '</td>

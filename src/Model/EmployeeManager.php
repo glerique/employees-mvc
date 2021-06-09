@@ -4,30 +4,16 @@ namespace App\Model;
 
 use PDO;
 use DateTime;
-use \App\Model\Bdd;
+use App\Model\Model;
 use App\Entity\Employee;
 use App\Model\DepartementManager;
 
 
 
-class EmployeeManager
+class EmployeeManager extends Model
 {
 
-        private $db;
-
-        public function __construct()
-        {
-                $this->db = Bdd::dbConnect();
-        }
-
-
-        public function count()
-        {
-                $query = $this->db->prepare('SELECT COUNT(*) FROM employee');
-                $query->execute();
-                $count = $query->fetchColumn();
-                return $count;
-        }
+        protected $table = "employee";
 
 
 
