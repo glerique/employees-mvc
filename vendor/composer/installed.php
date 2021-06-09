@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '30d157b393367eca5e902e654dbc44c805ea0826',
+    'reference' => '5f390383457c5772614f8029b7ddb1dad37ab55b',
     'name' => 'nesco/salaries',
   ),
   'versions' => 
@@ -40,7 +40,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '30d157b393367eca5e902e654dbc44c805ea0826',
+      'reference' => '5f390383457c5772614f8029b7ddb1dad37ab55b',
     ),
     'nikic/php-parser' => 
     array (
