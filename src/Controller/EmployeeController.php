@@ -19,15 +19,6 @@ class EmployeeController extends Controller
     {
         $this->model = new EmployeeManager();
     }
-    /*
-    public function index()
-    {
-
-        $employees = $this->model->findAll();
-        $total = $this->model->count();
-        Renderer::render("employee/listing", compact('employees', 'total'));
-    }
-    */
 
     public function index()
     {
