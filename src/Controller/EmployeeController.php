@@ -19,7 +19,7 @@ class EmployeeController extends Controller
     {
         $this->model = new EmployeeManager();
     }
-
+    /*
     public function index()
     {
 
@@ -27,13 +27,14 @@ class EmployeeController extends Controller
         $total = $this->model->count();
         Renderer::render("employee/listing", compact('employees', 'total'));
     }
+    */
 
-    public function index2()
+    public function index()
     {
         $id = $_GET['id'];
         if (!$id or !is_int($id)) {
             $this->redirectWithError(
-                "/mvc-employees/employee/index2/1",
+                "/mvc-employees/employee/index/1",
                 "Merci de renseigner un numéro de page valide"
             );
         }
@@ -46,7 +47,7 @@ class EmployeeController extends Controller
         $employees = $this->model->PaginateFindAll($id, $perPage);
 
 
-        Renderer::render("employee/paginate", compact('employees', 'currentPage', 'pages'));
+        Renderer::render("employee/listing", compact('employees', 'currentPage', 'pages'));
     }
 
     public function show()
