@@ -13,17 +13,14 @@
         <div class="container">
             <div class="row">
                 <nav class="col navbar navbar-expand-lg navbar-dark">
-                    <a class="navbar-brand" href="/mvc-employees/">mvc-employee</a>
+                    <a class="navbar-brand" href="/mvc-employees/employee/index/1">mvc-employee</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div id="navbarContent" class="collapse navbar-collapse">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="/mvc-employees/employee/index">Liste des salariés</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/mvc-employees/employee/index2/1">Paginate</a>
+                                <a class="nav-link" href="/mvc-employees/employee/index/1">Liste des salariés</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/mvc-employees/employee/newView">Nouveau salarié</a>
