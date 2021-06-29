@@ -59,8 +59,10 @@ class EmployeeManager extends Model
                 $req->execute();
                 $req->setFetchMode(PDO::FETCH_CLASS, $this->class);
                 $employee =  $req->fetch();
-                $departementManager = new DepartementManager();
-                $employee->setDepartement($departementManager->findById($employee->getDepartementId()));
+                if (!empty($employee)) {
+                        $departementManager = new DepartementManager();
+                        $employee->setDepartement($departementManager->findById($employee->getDepartementId()));
+                }
                 return $employee;
         }
 

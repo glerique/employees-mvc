@@ -24,9 +24,9 @@ class EmployeeController extends Controller
     {
         $id = $_GET['id'];
         if (!$id or !is_int($id)) {
-            $this->redirectWithError(
-                "/mvc-employees/employee/index/1",
-                "Merci de renseigner un numéro de page valide"
+            $this->redirect(
+                "/mvc-employees/employee/index/1"
+
             );
         }
 
@@ -36,7 +36,12 @@ class EmployeeController extends Controller
         $currentPage = $pagination->getCurrentPage();
         $perPage = $pagination->getPerPage();
         $employees = $this->model->PaginateFindAll($id, $perPage);
-
+        if (!$employees) {
+            $this->redirectWithError(
+                "/mvc-employees/employee/index/1",
+                "Vous essayez de consulter une page qui n'existe pas !"
+            );
+        }
 
         Renderer::render("employee/listing", compact('employees', 'currentPage', 'pages'));
     }
@@ -54,7 +59,7 @@ class EmployeeController extends Controller
         if (!$employee) {
             $this->redirectWithError(
                 "/mvc-employees/employee/index",
-                "Vous essayé de consulter un employee qui n'existe pas !"
+                "Vous essayez de consulter un employee qui n'existe pas !"
             );
         }
 
@@ -115,7 +120,7 @@ class EmployeeController extends Controller
         if (!$employee) {
             $this->redirectWithError(
                 "/mvc-employees/employee/index",
-                "Vous essayé de modifier un employé qui n'existe pas !"
+                "Vous essayez de modifier un employé qui n'existe pas !"
             );
         }
         $departements = $departementManager->findAll();
@@ -170,7 +175,7 @@ class EmployeeController extends Controller
         if (!$employee) {
             $this->redirectWithError(
                 "/mvc-employees/employee/index",
-                "Vous essayé de supprimer un employé qui n'existe pas !"
+                "Vous essayez de supprimer un employé qui n'existe pas !"
             );
         }
         $manager->deleteById($employee);
