@@ -49,9 +49,9 @@ class Application
             }
 
             if (!empty($params[2])) {
-               //try{$controller->$action($params[2]);}  catch (Error $e){echo 'marche pas';}     
-                $_GET['id']=(int)$params[2];
-                $controller->$action();            
+                //try{$controller->$action($params[2]);}  catch (Error $e){echo 'marche pas';}     
+                $_GET['id'] = (int)$params[2];
+                $controller->$action();
             } else {
                 $controller->$action();
             }
